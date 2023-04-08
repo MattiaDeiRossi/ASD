@@ -1,5 +1,4 @@
 #include <vector>
-#include <iostream>
 using namespace std;
 
 void merge(int array[], int const left, int const mid, int const right)
@@ -48,10 +47,10 @@ void mergeSort(int array[], int const begin, int const end)
     if (begin >= end)
         return; 
   
-    auto mid = begin + (end - begin) / 2; //floor((begin +end)/2);
-    mergeSort(array, begin, mid);   // T(n/2)
-    mergeSort(array, mid + 1, end); // T(n/2)
-    merge(array, begin, mid, end);  // T(n) =  θ(n1 + n2) +  θ(n) =  θ(n) 
+    auto mid = begin + (end - begin) / 2;   //floor((begin +end)/2);
+    mergeSort(array, begin, mid);           // T(n/2)
+    mergeSort(array, mid + 1, end);         // T(n/2)
+    merge(array, begin, mid, end);          // T(n) =  θ(n1 + n2) +  θ(n) =  θ(n) 
 }
 
 void sortDiff(vector<int>& arr){
@@ -71,33 +70,8 @@ void sortDiff(vector<int>& arr){
 
 }
 
-void differenze(vector<int>& arr){
-    mergeSort(arr.data(), 0, arr.size()-1);
-    sortDiff(arr);
-}
-
-bool checker(vector<int>& arr){
-    // |A[i] – A[i+1]| ≥ |A[i+1]−A[i+2]|
-    for (int i = 0; i < arr.size()-2; i++)
-    {
-        if(! (abs(arr[i] - arr[i+1]) >= abs(arr[i+1]-arr[i+2])) ){
-            return false;
-        }
-    }
-
-    return true;
-    
-}
-
-int main(){
-    {
-        std::vector<int> a = {7,4,2,6};
-        differenze(a);
-        cout<< checker(a) << endl;
-    }
-    {
-        std::vector<int> a = {7,4,4,2,6};
-        differenze(a);
-        cout<< checker(a) << endl;
-    }
+// T(n) = θ(nlogn) + θ(n) = θ(nlogn)
+void differenze(vector<int>& arr){ 
+    mergeSort(arr.data(), 0, arr.size()-1);     // T(n) = θ(nlogn)
+    sortDiff(arr);                              // T(n) = θ(n) 
 }

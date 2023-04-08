@@ -2,6 +2,10 @@
 #include <vector>
 #include <iostream>
 
+// n = numero di chiavi inserite nella tabella
+// m = numero di entry disponibili
+// α = n/m
+
 constexpr int hashsize = 8;
 
 using namespace std;
@@ -26,6 +30,8 @@ int funHash(int val)
   return val % hashsize;
 }
 
+// caso pessimo T(n) = θ(1)
+// caso medio T(n) = θ(1)
 /*post: costruisce un dizionario vuoto */
 Dizionario::Dizionario()
 {
@@ -34,6 +40,8 @@ Dizionario::Dizionario()
   pimpl->numchiavi = 0;
 }
 
+// caso pessimo T(n) = θ(n)
+// caso medio T(n) = θ(n)
 /*post: rimuove il dizionario*/
 Dizionario::~Dizionario()
 {
@@ -46,6 +54,8 @@ Dizionario::~Dizionario()
   delete pimpl;
 }
 
+// caso pessimo T(n) = θ(n)
+// caso medio T(n) = θ( 1+α )
 /*pre: k non e' presente nel dizionario*/
 /*post: associa il valore val alla chiave k nel dizionario*/
 void Dizionario::inserisci(int k, int val)
@@ -69,6 +79,8 @@ void Dizionario::inserisci(int k, int val)
   pimpl->numchiavi++;
 }
 
+// caso pessimo T(n) = θ(1)
+// caso medio T(n) = θ(1)
 /*pre: l'elemento x e' contenuto nel dizionario*/
 /*post: rimuove l'elemento x dal dizionario */
 void Dizionario::cancella(PElem x)
@@ -90,6 +102,8 @@ void Dizionario::cancella(PElem x)
   pimpl->numchiavi--;
 }
 
+// caso pessimo T(n) = θ(n)
+// caso medio T(n) = θ( 1+α )
 /*post: restituisce un elemento con chiave k se esiste, nullptr altrimenti */
 PElem Dizionario::cerca(int k)
 {
@@ -107,12 +121,16 @@ PElem Dizionario::cerca(int k)
   return nullptr;
 }
 
+// caso pessimo T(n) = θ(1)
+// caso medio T(n) = θ(1)
 /*post: restituisce il numero di chiavi nel dizionario*/
 int Dizionario::numChiavi()
 {
   return pimpl->numchiavi;
 }
 
+// caso pessimo T(n) = θ(1)
+// caso medio T(n) = θ(1)
 /*pre: l'elemento x e' contenuto nel dizionario */
 /*post: restituisce la chiave di x*/
 int Dizionario::leggiChiave(PElem x)
@@ -120,6 +138,8 @@ int Dizionario::leggiChiave(PElem x)
   return x->key;
 }
 
+// caso pessimo T(n) = θ(1)
+// caso medio T(n) = θ(1)
 /*pre: l'elemento x e' contenuto nel dizionario */
 /*post: restituisce il valore di x*/
 int Dizionario::leggiInfo(PElem x)
@@ -127,6 +147,8 @@ int Dizionario::leggiInfo(PElem x)
   return x->info;
 }
 
+// caso pessimo T(n) = θ(n*n)
+// caso medio T(n) = θ(n)
 /*post: stampa il contenuto del dizionario */
 void Dizionario::stampa()
 {
@@ -135,7 +157,7 @@ void Dizionario::stampa()
     while (it != nullptr)
     {
       //TODO: rimuovi hash 
-      cout << "key: " << it->key << ", hash: "<< funHash(it->key)<< ", info: " << it->info << endl;
+      cout << "key: " << it->key << /*", hash: "<< funHash(it->key)<<*/ ", info: " << it->info << endl;
       it = it->tail;
     }
   }
